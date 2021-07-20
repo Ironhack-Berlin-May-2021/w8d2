@@ -4,13 +4,21 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+// get the logged in user from the backend and pass it to App.js as 
+// a prop
+axios.get('/api/auth/loggedin')
+  .then(response => {
+    console.log('logged in user: ', response.data);
+    const user = response.data;
+    ReactDOM.render(
+      <BrowserRouter>
+        <App user={user} />
+      </BrowserRouter>,
+      document.getElementById('root')
+    );
+  })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
