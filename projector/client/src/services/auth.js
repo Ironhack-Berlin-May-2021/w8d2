@@ -6,7 +6,7 @@ const signup = (username, password) => {
 			return response.data
 		})
 		.catch(err => {
-			return err
+			return err.response.data
 		})
 }
 
